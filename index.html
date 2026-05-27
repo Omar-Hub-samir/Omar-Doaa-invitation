@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang='ar' dir='rtl'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>عمر & دعاء</title>
+<link href='https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap' rel='stylesheet'>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif}
+body{background:#111;color:white;overflow-x:hidden}
+.hero{height:100vh;background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.7)),url('assets/4.jpeg') center/cover;display:flex;align-items:center;justify-content:center;padding:20px;text-align:center}
+.glass{background:rgba(255,255,255,.08);backdrop-filter:blur(12px);padding:35px;border-radius:30px;width:100%;max-width:450px}
+.envelope{font-size:80px;animation:float 2s infinite ease-in-out;cursor:pointer}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+h1{font-size:58px;color:#f1c995;margin:15px 0}
+.subtitle{font-size:24px}
+.button{display:inline-block;margin-top:20px;padding:14px 28px;background:#c69b6d;color:white;text-decoration:none;border-radius:15px}
+.section{padding:70px 20px;text-align:center}
+.timer{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:500px;margin:40px auto}
+.box{background:rgba(255,255,255,.08);padding:30px;border-radius:22px}
+.num{font-size:55px;color:#f1c995}
+.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;max-width:850px;margin:auto}
+.gallery img{width:100%;height:320px;object-fit:cover;border-radius:20px}
+.music-btn{position:fixed;top:20px;left:20px;background:#ffffff22;border:none;padding:14px;border-radius:50%;font-size:22px;color:white}
+.footer{padding:60px 20px;text-align:center;color:#d9b48c}
+</style>
+</head>
+
+<body>
+
+<button class='music-btn' onclick='toggleMusic()'>🎵</button>
+
+<section class='hero'>
+<div class='glass'>
+<div class='envelope' onclick='openInvite()'>💌</div>
+<p>اضغط لفتح الدعوة</p>
+<h1>عمر & دعاء</h1>
+<p class='subtitle'>يدعوانكم لحضور حفل زفافهما</p>
+<p style='margin-top:15px'>16 أكتوبر 2026</p>
+<p>الساعة 9 مساءً</p>
+<a href='#count' class='button'>العد التنازلي</a>
+</div>
+</section>
+
+<section class='section' id='count'>
+<h2 style='font-size:40px;color:#f1c995'>⏳ باقي على الزفاف</h2>
+
+<div class='timer'>
+<div class='box'><div class='num' id='days'>0</div>يوم</div>
+<div class='box'><div class='num' id='hours'>0</div>ساعة</div>
+<div class='box'><div class='num' id='minutes'>0</div>دقيقة</div>
+<div class='box'><div class='num' id='seconds'>0</div>ثانية</div>
+</div>
+</section>
+
+<section class='section'>
+<h2 style='font-size:40px;color:#f1c995;margin-bottom:35px'>📸 لحظات من قصتنا</h2>
+
+<div class='gallery'>
+<img src='assets/1.jpeg'>
+<img src='assets/2.jpeg'>
+<img src='assets/3.jpeg'>
+<img src='assets/4.jpeg'>
+</div>
+</section>
+
+<section class='section'>
+<h2 style='font-size:38px;color:#f1c995'>📍 مكان الحفل</h2>
+<p style='font-size:30px;margin:20px 0'>Diamond Hall</p>
+
+<a class='button' target='_blank' href='https://maps.app.goo.gl/RPXMxUht4xTKCKT37?g_st=ic'>
+فتح الخريطة
+</a>
+</section>
+
+<section class='footer'>
+<h2>وأخيراً هسمع صوتك يا قلبي ❤️</h2>
+</section>
+
+<audio id='music' loop>
+<source src='https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8f6f00f4f.mp3?filename=wedding-110994.mp3' type='audio/mpeg'>
+</audio>
+
+<script>
+const music=document.getElementById('music');
+
+function openInvite(){
+music.play();
+}
+
+function toggleMusic(){
+if(music.paused){music.play()}else{music.pause()}
+}
+
+const weddingDate=new Date('2026-10-16T21:00:00').getTime();
+
+setInterval(()=>{
+const now=new Date().getTime();
+const diff=weddingDate-now;
+
+document.getElementById('days').innerHTML=Math.floor(diff/(1000*60*60*24));
+document.getElementById('hours').innerHTML=Math.floor((diff/(1000*60*60))%24);
+document.getElementById('minutes').innerHTML=Math.floor((diff/(1000*60))%60);
+document.getElementById('seconds').innerHTML=Math.floor((diff/1000)%60);
+
+},1000);
+</script>
+
+</body>
+</html>
